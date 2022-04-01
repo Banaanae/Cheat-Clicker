@@ -1,0 +1,10 @@
+Gui, Add, Text, x32 y29 w80 h20 , Clicks per click
+Gui, Add, Edit, x22 y59 w90 h20 , 2
+Gui, Add, Hotkey, x132 y59 w90 h20 , home
+Gui, Add, Text, x132 y29 w90 h20 , Stop Cheat Hotkey
+Gui, Add, Button, x22 y89 w200 h20 , Start
+Gui, Show, x465 y213 h383 w483, New GUI Window
+Return
+
+GuiClose:
+ExitApp
