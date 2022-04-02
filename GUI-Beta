@@ -1,13 +1,17 @@
-Gui, Add, Text, x22 y19 w90 h20 , Clicks per click
-Gui, Add, Edit, x22 y49 w90 h20 , 2
-Gui, Add, Hotkey, x132 y49 w90 h20 , F5
-Gui, Add, Text, x132 y19 w90 h20 , Stop Cheat Hotkey
-Gui, Add, Button, x22 y79 w200 h20 , Start
-Gui, Show, x289 y240 h125 w249, Cheat Clicker
+MsgBox, 0, Important, Important! This is only a test build currently`nThis will not work go into readme to find working one, 10
+Gui, Add, Text, x22 y19 w90 h20, Clicks per click
+Gui, Add, Edit, x22 y49 w90 h20 number vclicks, 2
+Gui, Add, Hotkey, x132 y49 w90 h20, F5
+Gui, Add, Text, x132 y19 w90 h20, Stop Cheat Hotkey
+Gui, Add, Button, x22 y79 w200 h20, Start
+Gui, Show, x289 y240 h127 w249, Cheat Clicker
 Return
 
 ButtonStart:
-MsgBox, 0, Start Pressed, Start Pressed
+GuiControlGet, clicks
+MsgBox, 0, Start Pressed, %clicks%
+Return
 
 GuiClose:
 ExitApp
+Return
