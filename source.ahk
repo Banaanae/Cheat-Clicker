@@ -1,13 +1,13 @@
 clicks = 1
 
-Gui, Add, Text, x22 y19 w90 h20, Clicks per click
-Gui, Add, Edit, x22 y49 w90 h20 number vclicks, 2
-;Gui, Add, Hotkey, x132 y49 w90 h20, F5
-Gui, Add, Text, x132 y49 w90 h20, WIP (F5 for now)
-Gui, Add, Text, x132 y19 w90 h20, Stop Cheat Hotkey
-Gui, Add, Button, x22 y79 w200 h20, Start
+Gui, Add, Text, x25 y20 w90 h20, Clicks per click
+Gui, Add, Edit, x25 y50 w90 h20 number vclicks, 2
+Gui, Add, Text, x141 y20 w90 h20, Stop Cheat Hotkey
+;Gui, Add, Hotkey, x141 y20 w90 h20, F5
+Gui, Add, Text, x141 y50 w90 h20, WIP (F5 for now)
+Gui, Add, Button, x25 y80 w200 h20, Start
 Gui, -MaximizeBox
-Gui, Show, h127 w249, Cheat Clicker
+Gui, Show, h128 w256, Cheat Clicker
 Return
 
 ButtonStart:
