@@ -6,8 +6,9 @@ Gui, Add, Text, x141 y20 w90 h20, Stop Cheat Hotkey
 ;Gui, Add, Hotkey, x141 y20 w90 h20, F5
 Gui, Add, Text, x141 y50 w90 h20, WIP (F5 for now)
 Gui, Add, Button, x25 y80 w200 h20, Start
+Gui, Add, Text, x80 y110, Made by Banaanae
 Gui, -MaximizeBox
-Gui, Show, h128 w256, Cheat Clicker
+Gui, Show, h140 w256, Cheat Clicker
 Return
 
 ButtonStart:
