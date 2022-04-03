@@ -1,6 +1,7 @@
 # Cheat-Clicker
 - Cheat clicker is a open source cheat for clicking faster
 - It works by detecting when you click and sending x more instead
+- Feel free to make pull requests / Issues it really helps me
 
 # How to use
 - Go to releases and download Cheat-Clicker.exe
