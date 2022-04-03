@@ -6,7 +6,7 @@ Gui, Add, Hotkey, x132 y49 w90 h20, F5
 Gui, Add, Text, x132 y19 w90 h20, Stop Cheat Hotkey
 Gui, Add, Button, x22 y79 w200 h20, Start
 Gui, -MaximizeBox
-Gui, Show, x289 y240 h127 w249, Cheat Clicker
+Gui, Show, h127 w249, Cheat Clicker
 Return
 
 ButtonStart:
@@ -26,5 +26,5 @@ Return
 
 F5::
 clicks = 1
-;WinMaximize, Cheat Clicker
+WinActivate, Cheat Clicker
 Return
