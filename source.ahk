@@ -13,7 +13,7 @@ Return
 
 ButtonStart:
 if (StopKey = "")
-    MsgBox, 36, Alert, You have not set a stop hotkey!`nWithout a stop hotkey it may be hard to stop cheat clicking`nSet one now?`nUse tab for the arrow keys to select and press enter to submit
+    MsgBox, 52, Alert, You have not set a stop hotkey!`nWithout a stop hotkey it may be hard to stop cheat clicking`nSet one now?`nUse tab or the arrow keys to select and press enter to submit
 IfMsgBox, Yes
     Return
 WinMinimize, Cheat Clicker
