@@ -13,9 +13,11 @@ Return
 
 ButtonStart:
 if (StopKey = "")
+    Hotkey, LButton, Off
     MsgBox, 52, Alert, You have not set a stop hotkey!`nWithout a stop hotkey it may be hard to stop cheat clicking`nSet one now?`nUse tab or the arrow keys to select and press enter to submit
 IfMsgBox, Yes
     Return
+Hotkey, LButton, On
 WinMinimize, Cheat Clicker
 GuiControlGet, clicks
 Return
