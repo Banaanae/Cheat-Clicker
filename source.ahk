@@ -19,6 +19,8 @@ IfMsgBox, Yes
 Hotkey, LButton, Cheat, On
 WinMinimize, Cheat Clicker
 GuiControlGet, clicks
+if clicks = 1
+    Hotkey, LButton, Off
 Return
 
 GuiClose:
