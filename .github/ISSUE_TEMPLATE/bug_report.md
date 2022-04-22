@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve Cheat Clicker
-title: Short title describing bug
+title: Short description of your Bug.
 labels: bug
 assignees: ''
 
