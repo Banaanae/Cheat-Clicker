@@ -6,9 +6,10 @@ Gui, Add, Edit, x25 y50 w90 h20 number vclicks, 2
 Gui, Add, Text, x141 y20 w90 h20, Stop Hotkey
 Gui, Add, Hotkey, x141 y50 w90 h20 gStopKey vStopKey
 Gui, Add, Button, x25 y80 w207 h20, Start
-Gui, Add, Text, x80 y110, Made by Banaanae
+Gui, Add, Button, x25 y110 w207 h20, Open Autoclicker
+Gui, Add, Text, x80 y140, Made by Banaanae
 Gui, -MaximizeBox
-Gui, Show, h140 w256, Cheat Clicker
+Gui, Show, h170 w256 Center, Cheat Clicker
 Return
 
 ButtonStart:
@@ -46,3 +47,6 @@ Reset:
 Hotkey, LButton, Off
 WinActivate, Cheat Clicker
 Return
+
+ButtonOpenAutoclicker:
+; Run autoclicker script
