@@ -52,17 +52,29 @@ ButtonOpenAutoclicker:
 PreviousHotkey := ""
 StopKey := ""
 Gui, Destroy
+MsgBox, 64, Important, If you want to click forever, press 0 in Amt. clicks
 Gui, Add, Text, x12 y10 w310 h20, Autoclicker
 Gui, Add, Text, x12 y40 w70 h20, Delay (ms)
 Gui, Add, Text, x92 y40 w70 h20, Amt. clicks
 Gui, Add, Text, x172 y40 w70 h20, Hotkey
 Gui, Add, Text, x252 y40 w70 h20, Click Type
-Gui, Add, Edit, x12 y70 w70 h20 number, 
-Gui, Add, Edit, x92 y70 w70 h20 number,
-Gui, Add, Hotkey, x172 y70 w70 h20 ; gToggle vToggle
-Gui, Add, DropDownList, x252 y70 w70 h60, Left|Right
+Gui, Add, Edit, x12 y70 w70 h20 number vDelay, 
+Gui, Add, Edit, x92 y70 w70 h20 number vAmount,
+Gui, Add, Hotkey, x172 y70 w70 h20 vToggle
+Gui, Add, DropDownList, x252 y70 w70 h60 vType, Left|Right
 Gui, Add, Button, x12 y100 w150 h20, Start
 Gui, Add, Button, x172 y100 w150 h20, Stop
 Gui, -MaximizeBox
 Gui, Show, center h130 w340, Autoclicker
+Return
+
+ButtonStart:
+GuiControlGet, Delay
+GuiControlGet, Amount
+GuiControlGet, Toggle
+GuiControlGet, Type
+if (Amount = 0)
+    MsgBox, 0, Infinite Loop, 0 = infinite loop
+Else
+    MsgBox, 0, Finite Loop, Will loop %Amount% time/s
 ; Get autoclicker variables and start it
