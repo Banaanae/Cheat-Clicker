@@ -61,7 +61,7 @@ Gui, Add, Text, x252 y40 w70 h20, Click Type
 Gui, Add, Edit, x12 y70 w70 h20 number vDelay, 
 Gui, Add, Edit, x92 y70 w70 h20 number vAmount,
 Gui, Add, Hotkey, x172 y70 w70 h20 vToggle
-Gui, Add, DropDownList, x252 y70 w70 h60 vType, Left|Right
+Gui, Add, DropDownList, x252 y70 w70 h60 vCType, Left|Right
 Gui, Add, Button, x12 y100 w150 h20, Start
 Gui, Add, Button, x172 y100 w150 h20, Stop
 Gui, -MaximizeBox
@@ -72,9 +72,21 @@ ButtonStart:
 GuiControlGet, Delay
 GuiControlGet, Amount
 GuiControlGet, Toggle
-GuiControlGet, Type
+GuiControlGet, CType
+MsgBox, 0, Title, %CType%
 if (Amount = 0)
-    MsgBox, 0, Infinite Loop, 0 = infinite loop
+    Loop {
+        if (CType = Left)
+            Click
+        Else
+            Click, Right
+        Sleep, %delay%
+    }
 Else
-    MsgBox, 0, Finite Loop, Will loop %Amount% time/s
-; Get autoclicker variables and start it
+    Loop %Amount% {
+        if (CType = Left)
+            Click
+        Else
+            Click, Right
+        Sleep, %delay%
+    }
