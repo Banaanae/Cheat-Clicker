@@ -55,19 +55,19 @@ PreviousHotkey := ""
 StopKey := ""
 Gui, Destroy
 MsgBox, 64, Important, If you want to click forever, press 0 in Amt. clicks
-Gui, Add, Text, x12 y10 w310 h20, Autoclicker
-Gui, Add, Text, x12 y40 w70 h20, Delay (ms)
-Gui, Add, Text, x92 y40 w70 h20, Amt. clicks
-Gui, Add, Text, x172 y40 w70 h20, Hotkey
-Gui, Add, Text, x252 y40 w70 h20, Click Type
-Gui, Add, Edit, x12 y70 w70 h20 number vDelay, 
-Gui, Add, Edit, x92 y70 w70 h20 number vAmount,
-Gui, Add, Hotkey, x172 y70 w70 h20 vToggle
-Gui, Add, DropDownList, x252 y70 w70 h60 vCType, Left|Right
-Gui, Add, Button, x12 y100 w150 h20, Start
-Gui, Add, Button, x172 y100 w150 h20, Stop
+Gui, Add, Text, x12 y10 w70 h20, Delay (ms)
+Gui, Add, Text, x92 y10 w70 h20, Amt. clicks
+Gui, Add, Text, x172 y10 w70 h20, Hotkey
+Gui, Add, Text, x252 y10 w70 h20, Click Type
+Gui, Add, Edit, x12 y30 w70 h20 number vDelay, 
+Gui, Add, Edit, x92 y30 w70 h20 number vAmount,
+Gui, Add, Hotkey, x172 y30 w70 h20 vToggle
+Gui, Add, DropDownList, x252 y30 w70 h60 vCType, Left|Right
+Gui, Add, Button, x12 y60 w150 h20, Start
+Gui, Add, Button, x172 y60 w150 h20, Stop
+Gui, Add, Text, x120 y90, Made by Banaanae
 Gui, -MaximizeBox
-Gui, Show, center h130 w340, Autoclicker
+Gui, Show, center h110 w335, Autoclicker
 Return
 
 ButtonStart:
