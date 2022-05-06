@@ -1,3 +1,5 @@
+#SingleInstance, Force
+
 clicks := 1
 PreviousHotkey := ""
 
