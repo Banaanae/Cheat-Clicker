@@ -62,7 +62,7 @@ Gui, Add, Text, x252 y10 w70 h20, Click Type
 Gui, Add, Edit, x12 y30 w70 h20 number vDelay, 
 Gui, Add, Edit, x92 y30 w70 h20 number vAmount,
 Gui, Add, Hotkey, x172 y30 w70 h20 vToggle
-Gui, Add, DropDownList, x252 y30 w70 h60 vCType, Left|Right
+Gui, Add, DropDownList, x252 y30 w70 h60 vCType, Left||Right
 Gui, Add, Button, x12 y60 w150 h20, Start
 Gui, Add, Button, x172 y60 w150 h20, Stop
 Gui, Add, Text, x120 y90, Made by Banaanae
@@ -75,7 +75,6 @@ GuiControlGet, Delay
 GuiControlGet, Amount
 GuiControlGet, Toggle
 GuiControlGet, CType
-MsgBox, 0, Title, %CType%
 if (Amount = 0)
     Loop {
         if (CType = Left)
