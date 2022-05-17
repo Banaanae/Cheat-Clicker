@@ -55,7 +55,7 @@ ButtonOpenAutoclicker:
 PreviousHotkey := ""
 StopKey := ""
 Gui, Destroy
-MsgBox, 64, Important, If you want to click forever, press 0 in Amt. clicks`nNote! Click Type, Hotkey and Stop button all temp disabled.
+MsgBox, 64, Important, If you want to click forever, press 0 in Amt. clicks (IGNORE! TYPING 0 WILL DEFAULT TO ONE)`nNote! Click Type, Hotkey and Stop button all temp disabled.
 Gui, Add, Text, x12 y10 w70 h20, Delay (ms)
 Gui, Add, Text, x92 y10 w70 h20, Amt. clicks
 Gui, Add, Text, x172 y10 w70 h20, Hotkey
@@ -79,6 +79,8 @@ GuiControlGet, Amount
 ;GuiControlGet, Toggle
 ;GuiControlGet, CType
 active := true
+if (Amount = 0)
+    Amount := 1
 if (Amount = 0)
     Loop {
 ;        if (CType = Left)
