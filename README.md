@@ -10,6 +10,6 @@
 
 If you need help, feel free to [add me on discord](https://discordapp.com/users/467230314268196898)!
 
-Credits
-Icon:
+### Credits
+#### Icon:
 [FatCow Web Hosting](https://commons.wikimedia.org/wiki/File:Farm-Fresh_mouse_select_left.png#/media/File:Farm-Fresh_mouse_select_left.png), [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/deed.en), via Wikimedia Commons
