@@ -64,7 +64,7 @@ Gui, Add, Edit, x12 y30 w70 h20 number vDelay,
 Gui, Add, Edit, x92 y30 w70 h20 number vAmount,
 ;Gui, Add, Hotkey, x172 y30 w70 h20 vToggle
 Gui, Add, Text, x172 y30, Use Buttons
-;Gui, Add, DropDownList, x252 y30 w70 h60 vCType, Left||Right
+;Gui, Add, DropDownList, x252 y30 w70 h60 vCType, Left||Middle|Right
 Gui, Add, Text, x252 y30, WIP Left Only ; temp
 Gui, Add, Button, x12 y60 w150 h20, Start
 ;Gui, Add, Button, x172 y60 w150 h20, Stop
@@ -79,13 +79,13 @@ GuiControlGet, Amount
 ;GuiControlGet, Toggle
 ;GuiControlGet, CType
 active := true
-if (Amount = 0)
-    Amount := 1
+if (Amount = 0) ; Temp
+    Amount := 1 ; Temp
 if (Amount = 0)
     Loop {
 ;        if (CType = Left)
             Click
-;        Else
+;        Else ; Add Middle when working
 ;            Click, Right
         Sleep, %delay%
     } until active = false
@@ -93,7 +93,7 @@ Else
     Loop %Amount% {
 ;        if (CType = Left)
             Click
-;        Else
+;        Else ; See Else above
 ;            Click, Right
         Sleep, %delay%
     } until active = false
