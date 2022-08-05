@@ -64,7 +64,7 @@ Gui, Add, Edit, x12 y30 w70 h20 number vDelay,
 Gui, Add, Edit, x92 y30 w70 h20 number vAmount,
 ;Gui, Add, Hotkey, x172 y30 w70 h20 vToggle
 Gui, Add, Text, x172 y30, Use Buttons
-;Gui, Add, DropDownList, x252 y30 w70 h60 vCType, Left||Middle|Right
+;Gui, Add, DropDownList, x252 y30 w70 h20 vCType R3, Left||Middle|Right
 Gui, Add, Text, x252 y30, WIP Left Only ; temp
 Gui, Add, Button, x12 y60 w150 h20, Start
 ;Gui, Add, Button, x172 y60 w150 h20, Stop
