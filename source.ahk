@@ -27,10 +27,6 @@ if clicks = 1
     Hotkey, LButton, Off
 Return
 
-GuiClose:
-ExitApp
-Return
-
 Cheat:
 Loop %clicks% {
     Click
@@ -103,3 +99,11 @@ Return
 ;ButtonStop: ; This code doesn't work because the loop doesn't let this run
 ;active = false
 ;Return
+
+GuiClose:
+MsgBox, 36, Exit App?, Do you want to close Cheat Clicker?
+ifMsgBox, Yes
+{
+    ExitApp
+}
+Return
