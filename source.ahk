@@ -17,27 +17,38 @@ Return
 
 ButtonStartCheatClicking:
 if (StopKey = "")
+{
     MsgBox, 52, Alert, You have not set a stop hotkey!`nWithout a stop hotkey it may be hard to stop cheat clicking`nSet one now?
+}
 IfMsgBox, Yes
+{
     Return
+}
 Hotkey, LButton, Cheat, On
 WinMinimize, Cheat Clicker
 GuiControlGet, clicks
-if clicks = 1
+if (clicks = 1)
+{
     Hotkey, LButton, Off
+}
 Return
 
 Cheat:
-Loop %clicks% {
+Loop %clicks%
+{
     Click
 }
 Return
 
 StopKey:
 if PreviousHotkey
+{
     Hotkey, %PreviousHotkey%, Off
+}
 if !StopKey
+{
     Return
+}
 Hotkey, %StopKey%, Reset, On
 PreviousHotkey := StopKey
 Return
@@ -78,7 +89,8 @@ active := true
 if (Amount = 0) ; Temp
     Amount := 1 ; Temp
 if (Amount = 0)
-    Loop {
+    Loop
+    {
 ;        if (CType = Left)
             Click
 ;        Else ; Add Middle when working
@@ -86,7 +98,8 @@ if (Amount = 0)
         Sleep, %delay%
     } until active = false
 Else
-    Loop %Amount% {
+    Loop %Amount%
+    {
 ;        if (CType = Left)
             Click
 ;        Else ; See Else above
