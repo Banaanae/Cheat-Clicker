@@ -1,27 +1,38 @@
-clicks = 1
+clickAmount = 1
 
-InputBox, clicks, Welcome!, Welcome to cheat clicker!`nHow many clicks do you want to do per click?`nCan only contain 0-9, SHOW, Default, Default, Center, Center, Locale,, 2
+MsgBox, 64, Welcome!, Welcome to Cheat Clicker`nCheat Clicker is pretty easy to use`nJust set the amount of times you want to click each time you click and press Enter`n`nHere are some useful hotkeys:`nF5 - Allows you to edit the click amount`nCtrl + F5 - Force exit Cheat Clicker`nNote: In some cases you might need to also use the fn key
 
-if clicks is not digit 
-    Loop {
-        InputBox, clicks, Welcome!, Welcome to cheat clicker!`nHow many clicks do you want to do per click?`nCan only contain 0-9`n`nOnly 1 2 3 4 5 6 7 8 9 works, SHOW, Default, Default, Center, Center, Locale, 2147483, 2
-        if clicks is digit 
-            Break
+clickInput()
+{
+    global clickAmount
+    InputBox, clickAmount, Welcome!, Welcome to Cheat Clicker!`nHow many clicks do you want to do per click?`nCan only contain 0-9, SHOW, Default, Default, Center, Center, Locale,, 2
+
+    if clickAmount is not digit
+    {
+        Loop
+        {
+            clickAmount := 1
+            InputBox, clickAmount, Welcome!, Welcome to Cheat Clicker!`nHow many clicks do you want to do per click?`nCan only contain keys 0-9, SHOW, Default, Default, Center, Center, Locale,, 2
+            if clickAmount is digit 
+                Break
+        }
     }
+}
+
+clickInput()
 
 LButton::
-loop %clicks% {
+loop, %clickAmount%
+{
     Click
 }
 Return
+
 F5::
-clicks = 1
+clickAmount = 1
+clickInput()
+Return
 
-InputBox, clicks, Welcome!, Welcome to cheat clicker!`nHow many clicks do you want to do per click?`nCan only contain 0-9`nPress Enter once finished, SHOW, Default, Default, Center, Center, Locale, 2147483, 2
-
-if clicks is not digit 
-    Loop {
-        InputBox, clicks, Welcome!, Welcome to cheat clicker!`nHow many clicks do you want to do per click?`nCan only contain 0-9`nPress Enter`n`nOnly 1 2 3 4 5 6 7 8 9 works, SHOW, Default, Default, Center, Center, Locale,, 2
-        if clicks is digit 
-            Break
-    }
+^F5::
+ExitApp
+Return
