@@ -74,7 +74,7 @@ Gui, Add, Text, x170 y30 w70 h20, WIP
 Gui, Add, DDL, x250 y30 w70 h20 vclickType R3, Left||Middle|Right
 Gui, Add, Button, x10 y60 w150 h20, Start
 Gui, Add, Button, x170 y60 w150 h20, Stop
-Gui, Add, Button, x10 y90 w310 h20, Return to Cheat Clicker
+Gui, Add, Button, x10 y90 w310 h20 Disabled, Return to Cheat Clicker
 Gui, Add, Text, x120 y120, Made by Banaanae
 Gui, -MaximizeBox
 Gui, Show, center h145 w335, Autoclicker
