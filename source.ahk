@@ -2,17 +2,17 @@
 
 clicks := 1
 PreviousHotkey := ""
-active := false
+active := "false"
 
-Gui, Add, Text, x25 y20 w90 h20, Clicks per click
-Gui, Add, Edit, x25 y50 w90 h20 number vclicks, 2
-Gui, Add, Text, x141 y20 w90 h20, Stop Hotkey
-Gui, Add, Hotkey, x141 y50 w90 h20 gStopKey vStopKey
-Gui, Add, Button, x25 y80 w207 h20, Start Cheat Clicking
-Gui, Add, Button, x25 y110 w207 h20, Open Autoclicker
-Gui, Add, Text, x80 y140, Made by Banaanae
+Gui, Add, Text, x10 y10 w90 h20, Clicks per 
+Gui, Add, Text, x110 y10 w90 h20, Stop Hotkey
+Gui, Add, Edit, x10 y40 w90 h20 number vclicks, 2
+Gui, Add, Hotkey, x110 y40 w90 h20 gStopKey vStopKey
+Gui, Add, Button, x10 y70 w190 h20, Start Cheat Clicking
+Gui, Add, Button, x10 y100 w190 h20, Open Autoclicker
+Gui, Add, Text, x58 y130, Made by Banaanae
 Gui, -MaximizeBox
-Gui, Show, h170 w256 Center, Cheat Clicker
+Gui, Show, center h160 w210, Cheat Clicker
 Return
 
 ButtonStartCheatClicking:
@@ -62,56 +62,75 @@ ButtonOpenAutoclicker:
 PreviousHotkey := ""
 StopKey := ""
 Gui, Destroy
-MsgBox, 64, Important, If you want to click forever, press 0 in Amt. clicks (IGNORE! TYPING 0 WILL DEFAULT TO ONE)`nNote! Click Type, Hotkey and Stop button all temp disabled.
-Gui, Add, Text, x12 y10 w70 h20, Delay (ms)
-Gui, Add, Text, x92 y10 w70 h20, Amt. clicks
-Gui, Add, Text, x172 y10 w70 h20, Hotkey
-Gui, Add, Text, x252 y10 w70 h20, Click Type
-Gui, Add, Edit, x12 y30 w70 h20 number vDelay, 
-Gui, Add, Edit, x92 y30 w70 h20 number vAmount,
-;Gui, Add, Hotkey, x172 y30 w70 h20 vToggle
-Gui, Add, Text, x172 y30, Use Buttons
-;Gui, Add, DropDownList, x252 y30 w70 h20 vCType R3, Left||Middle|Right
-Gui, Add, Text, x252 y30, WIP Left Only ; temp
-Gui, Add, Button, x12 y60 w150 h20, Start
-;Gui, Add, Button, x172 y60 w150 h20, Stop
-Gui, Add, Text, x120 y90, Made by Banaanae
+MsgBox, 64, Important, If you want to click forever, press 0 in Click Amount
+Gui, Add, Text, x10 y10 w70 h20, Delay (ms)
+Gui, Add, Text, x90 y10 w70 h20, Click Amount
+Gui, Add, Text, x170 y10 w70 h20, Hotkey
+Gui, Add, Text, x250 y10 w70 h20, Click Type
+Gui, Add, Edit, x10 y30 w70 h20 number vDelay, 1
+Gui, Add, Edit, x90 y30 w70 h20 number vAmount, 0
+;Gui, Add, Hotkey, x170 y30 w70 h20 vToggle
+Gui, Add, Text, x170 y30 w70 h20, WIP
+Gui, Add, DDL, x250 y30 w70 h20 vclickType R3, Left||Middle|Right
+Gui, Add, Button, x10 y60 w150 h20, Start
+Gui, Add, Button, x170 y60 w150 h20, Stop
+Gui, Add, Button, x10 y90 w310 h20, Return to Cheat Clicker
+Gui, Add, Text, x120 y120, Made by Banaanae
 Gui, -MaximizeBox
-Gui, Show, center h110 w335, Autoclicker
+Gui, Show, center h145 w335, Autoclicker
 Return
 
 ButtonStart:
 GuiControlGet, Delay
 GuiControlGet, Amount
-;GuiControlGet, Toggle
-;GuiControlGet, CType
-active := true
-if (Amount = 0) ; Temp
-    Amount := 1 ; Temp
+GuiControlGet, Toggle
+GuiControlGet, clickType
+active := "true"
+WinMinimize, Autoclicker
 if (Amount = 0)
-    Loop
+{
+    Loop,
     {
-;        if (CType = Left)
+        if (clickType = "Left")
+        {
             Click
-;        Else ; Add Middle when working
-;            Click, Right
+        }
+        Else if (clickType = "Right")
+        {
+            Click, Right
+        }
+        Else
+        {
+            Click, Middle
+        }
         Sleep, %delay%
-    } until active = false
+    } until active = "false"
+}
 Else
-    Loop %Amount%
+{
+    Loop, %Amount%
     {
-;        if (CType = Left)
+        if (clickType = "Left")
+        {
             Click
-;        Else ; See Else above
-;            Click, Right
+        }
+        Else if (clickType = "Right")
+        {
+            Click, Right
+        }
+        Else
+        {
+            Click, Middle
+        }
         Sleep, %delay%
-    } until active = false
-    active := false
+    } until active = "false"
+    active := "false"
+}
 Return
 
-;ButtonStop: ; This code doesn't work because the loop doesn't let this run
-;active = false
-;Return
+ButtonStop:
+active := "false"
+Return
 
 GuiClose:
 MsgBox, 36, Exit App?, Do you want to close Cheat Clicker?
