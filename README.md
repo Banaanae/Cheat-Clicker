@@ -4,7 +4,7 @@
 - Feel free to make pull requests / issues it really helps me out
 
 ### How to use
-- Go to releases and download Cheat-Clicker.exe
+- Go to [releases](https://github.com/Banaanae/Cheat-Clicker/releases/latest) and download Cheat-Clicker.exe
 - Run the exe and type how many clicks you want to do per click (e.g. if you type 3 you will click three times for every click)
 - When you are finished or want to change your clicks per click press the stop key you set (to stop press the close button)
 
