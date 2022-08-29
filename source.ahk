@@ -29,11 +29,11 @@ autoClicker()
     global
     Gui, Add, Text, x10 y10 w70 h20, Delay (ms)
     Gui, Add, Text, x90 y10 w70 h20, Click Amount
-    Gui, Add, Text, x170 y10 w70 h20, Hotkey
+    Gui, Add, Text, x170 y10 w70 h20 Disabled, Hotkey
     Gui, Add, Text, x250 y10 w70 h20, Click Type
     Gui, Add, Edit, x10 y30 w70 h20 number vDelay, 1
     Gui, Add, Edit, x90 y30 w70 h20 number vAmount, 0
-    Gui, Add, Hotkey, x170 y30 w70 h20 gstopKeyAC vstopKeyAC
+    Gui, Add, Hotkey, x170 y30 w70 h20 gstopKeyAC vstopKeyAC Disabled
     Gui, Add, DDL, x250 y30 w70 h20 vclickType R3, Left||Middle|Right
     Gui, Add, Button, x10 y60 w150 h20, Start
     Gui, Add, Button, x170 y60 w150 h20, Stop
