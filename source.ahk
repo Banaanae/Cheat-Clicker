@@ -4,10 +4,11 @@
 clicks := 1
 stopKeyCC := ""
 previousHotkeyCC := ""
+activeCC := "false"
 
 stopKeyAC := ""
 previousHotkeyAC := ""
-active := "false"
+activeAC := "false"
 
 cheatClicker()
 {
@@ -44,7 +45,7 @@ autoClicker()
     Return
 }
 
-autoClickerStart(Amount, clickType, delay, active)
+autoClickerStart(Amount, clickType, delay, activeAC)
 {
     if (Amount = 0)
     {
@@ -63,7 +64,7 @@ autoClickerStart(Amount, clickType, delay, active)
                 Click, Middle
             }
             Sleep, %delay%
-        } until active = "false"
+        } until activeAC = "false"
     }
     Else
     {
@@ -82,8 +83,8 @@ autoClickerStart(Amount, clickType, delay, active)
                 Click, Middle
             }
             Sleep, %delay%
-        } until active = "false"
-        active := "false"
+        } until activeAC = "false"
+        activeAC := "false"
     }
 }
 
@@ -106,6 +107,7 @@ if (clicks = 1)
 {
     Hotkey, LButton, Off
 }
+activeCC := "true"
 Return
 
 Cheat:
@@ -126,11 +128,15 @@ if !stopKeyCC
 }
 Hotkey, %stopKeyCC%, ResetCheatClicker, On
 previousHotkeyCC := stopKeyCC
+activeCC := "false"
 Return
 
 ResetCheatClicker:
-Hotkey, LButton, Off
-WinActivate, Cheat Clicker
+if (activeCC = "true")
+{
+    Hotkey, LButton, Off
+    WinActivate, Cheat Clicker
+}
 Return
 
 ButtonOpenAutoclicker:
@@ -146,9 +152,9 @@ GuiControlGet, Delay
 GuiControlGet, Amount
 GuiControlGet, stopKeyAC
 GuiControlGet, clickType
-active := "true"
+activeAC := "true"
 WinMinimize, Autoclicker
-autoClickerStart(Amount, clickType, delay, active)
+autoClickerStart(Amount, clickType, delay, activeAC)
 Return
 
 stopKeyAC:
@@ -160,20 +166,20 @@ if !stopKeyAC
 {
     Return
 }
-if (active = "true")
+if (activeAC = "true")
 {
-    active := "false"
+    activeAC := "false"
 }
 Else
 {
-    active := "true"
-    autoClickerStart(Amount, clickType, delay, active)
+    activeAC := "true"
+    autoClickerStart(Amount, clickType, delay, activeAC)
 }
 previousHotkeyAC := stopKeyAC
 Return
 
 ButtonStop:
-active := "false"
+activeAC := "false"
 Return
 
 ButtonReturntoCheatClicker:
