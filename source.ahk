@@ -37,7 +37,7 @@ autoClicker()
     Gui, Add, Hotkey, x170 y30 w70 h20 gstopKeyAC vstopKeyAC Disabled
     Gui, Add, DDL, x250 y30 w70 h20 vclickType R3, Left||Middle|Right
     Gui, Add, Button, x10 y60 w150 h20, Start
-    Gui, Add, Button, x170 y60 w150 h20, Stop
+    Gui, Add, Button, x170 y60 w150 h20 Disabled, Stop
     Gui, Add, Button, x10 y90 w310 h20, Return to Cheat Clicker
     Gui, Add, Text, x120 y120, Made by Banaanae
     Gui, -MaximizeBox
@@ -89,6 +89,7 @@ autoClickerStart(Amount, clickType, delay, activeAC)
 }
 
 cheatClicker()
+MsgBox, 16, Beta Build, This build is in beta and won't work
 Return ; I have no idea why but if it's not here issues arrive
 
 ButtonStartCheatClicking:
@@ -153,7 +154,9 @@ GuiControlGet, Amount
 GuiControlGet, stopKeyAC
 GuiControlGet, clickType
 activeAC := "true"
-WinMinimize, Autoclicker
+GuiControl, Disable, Start
+GuiControl, Enable, Stop
+;WinMinimize, Autoclicker
 autoClickerStart(Amount, clickType, delay, activeAC)
 Return
 
@@ -180,6 +183,8 @@ Return
 
 ButtonStop:
 activeAC := "false"
+GuiControl, Disable, Stop
+GuiControl, Enable, Start
 Return
 
 ButtonReturntoCheatClicker:
