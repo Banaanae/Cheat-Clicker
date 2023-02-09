@@ -2,7 +2,7 @@
 
 
 clicks := 1
-stopKeyCC := ""
+hotKeyCC := ""
 previousHotkeyCC := ""
 activeCC := "false"
 
@@ -10,13 +10,15 @@ stopKeyAC := ""
 previousHotkeyAC := ""
 activeAC := "false"
 
+MsgBox, 64, Beta, Cheat Clicker hotkey wont work
+
 cheatClicker()
 {
     global
     Gui, Add, Text, x10 y10 w90 h20, Clicks per click
-    Gui, Add, Text, x110 y10 w90 h20, Stop Hotkey
+    Gui, Add, Text, x110 y10 w90 h20 Disabled, Stop Hotkey
     Gui, Add, Edit, x10 y40 w90 h20 number vclicks, 2
-    Gui, Add, Hotkey, x110 y40 w90 h20 gstopKeyCC vstopKeyCC
+    Gui, Add, Hotkey, x110 y40 w90 h20 ghotKeyCC vhotKeyCC Disabled
     Gui, Add, Button, x10 y70 w190 h20, Start Cheat Clicking
     Gui, Add, Button, x10 y100 w190 h20, Open Autoclicker
     Gui, Add, Text, x58 y130, Made by Banaanae
@@ -89,10 +91,10 @@ autoClickerStart(Amount, clickType, delay, activeAC)
 }
 
 cheatClicker()
-Return ; I have no idea why but if it's not here issues arrive
+Return ; Here to prevent code below from running when it shouldn't
 
 ButtonStartCheatClicking:
-if (stopKeyCC = "")
+if (hotKeyCC = "")
 {
     MsgBox, 52, Alert, You have not set a stop hotkey!`nWithout a stop hotkey it may be hard to stop cheat clicking`nSet one now?
 }
@@ -101,7 +103,7 @@ IfMsgBox, Yes
     Return
 }
 Hotkey, LButton, Cheat, On
-WinMinimize, Cheat Clicker
+WinMinimize, Cheat Clicker ; Might Remove
 GuiControlGet, clicks
 if (clicks = 1)
 {
@@ -117,33 +119,31 @@ Loop %clicks%
 }
 Return
 
-stopKeyCC:
+hotKeyCC:
 if previousHotkeyCC
 {
     Hotkey, %previousHotkeyCC%, Off
 }
-if !stopKeyCC
+if !hotKeyCC
 {
     Return
 }
-Hotkey, %stopKeyCC%, ResetCheatClicker, On
-previousHotkeyCC := stopKeyCC
-activeCC := "false"
-Return
-
-ResetCheatClicker:
-if (activeCC = "true")
+previousHotkeyCC := hotKeyCC
+if activeCC
 {
-    Hotkey, LButton, Off
-    WinActivate, Cheat Clicker
+    Hotkey, LButton, Cheat, On
+}
+Else
+{
+    Hotkey, LButton,, Off
 }
 Return
 
 ButtonOpenAutoclicker:
 previousHotkeyCC := ""
-stopKeyCC := ""
+hotKeyCC := ""
 Gui, Destroy
-MsgBox, 64, Important, If you want to click forever, press 0 in Click Amount
+; MsgBox, 64, Important, If you want to click forever, press 0 in Click Amount
 autoClicker()
 Return
 
@@ -153,7 +153,7 @@ GuiControlGet, Amount
 GuiControlGet, stopKeyAC
 GuiControlGet, clickType
 activeAC := "true"
-WinMinimize, Autoclicker
+WinMinimize, Autoclicker ; Also might remove
 autoClickerStart(Amount, clickType, delay, activeAC)
 Return
 
