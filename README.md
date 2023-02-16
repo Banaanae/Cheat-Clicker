@@ -22,4 +22,4 @@ If you need help, feel free to [add me on discord](https://discordapp.com/users/
 
 ### Icon:
 
-[FatCow Web Hosting](https://commons.wikimedia.org/wiki/File:Farm-Fresh_mouse_select_left.png#/media/File:Farm-Fresh_mouse_select_left.png), [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/deed.en), via Wikimedia Commons
+By [FatCow Web Hosting](http://www.fatcow.com/free-icons/), [CC BY 3.0 us](https://commons.wikimedia.org/w/index.php?curid=11530257)
