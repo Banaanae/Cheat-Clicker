@@ -1,6 +1,7 @@
 #SingleInstance, Force
 
-
+Hotkey, LButton, Cheat, On
+Hotkey, LButton, Off
 clicks := 1
 hotKeyCC := ""
 previousHotkeyCC := ""
