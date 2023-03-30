@@ -1,9 +1,19 @@
-; Doesn't
+; Doesn't work
 #SingleInstance Force
 #Warn All, Off
 
-;Hotkey, LButton, Cheat, On
-;Hotkey, LButton, Off
+clicks := 2 ; Temp
+
+Cheat:
+Loop %clicks%
+{
+    ;Click
+    MsgBox(0, yY, cllicked)
+}
+Return
+
+Hotkey(LButton, Cheat, On)
+Hotkey(LButton,, Off)
 clicks := 1
 hotKeyCC := ""
 previousHotkeyCC := ""
@@ -24,56 +34,51 @@ CheatClickerGui.AddText("x58 y130", "Made by Banaanae")
 CheatClickerGui.Show()
 
 
-/*
+
 ButtonStartCheatClicking:
+/*
 if (hotKeyCC = "") {
     noHotkey := MsgBox, 52, Alert, You have not set a stop hotkey!`nWithout a stop hotkey it may be hard to stop cheat clicking`nSet one now?
     if (noHotkey = Yes) {
         Return
     }
 }
-;Hotkey, LButton, Cheat, On
-GuiControlGet, clicks
+*/
+Hotkey(LButton, Cheat, On)
+;GuiControlGet, clicks
 if (clicks = 1)
 {
-    ;Hotkey, LButton, Off
+    Hotkey(LButton,, Off)
 }
 activeCC := "true"
 Return
-*/
-Cheat:
-Loop ;%clicks%
-{
-    ;Click
-}
-Return
+
+
 
 hotKeyCC:
-if previousHotkeyCC
-{
-    ;Hotkey, %previousHotkeyCC%, Off
+if previousHotkeyCC {
+    Hotkey(%previousHotkeyCC%,, Off)
 }
-if !hotKeyCC
-{
+if !hotKeyCC {
     Return
 }
-;Hotkey, %hotKeyCC%, ResetCheatClicker, On
+Hotkey(%hotKeyCC%, ResetCheatClicker, On)
 previousHotkeyCC := hotKeyCC
 Return
-/*
+
 ResetCheatClicker:
 if (activeCC = "true")
 {
-    ;Hotkey, LButton, Off
+    Hotkey(LButton,, Off)
     activeCC := "false"
 }
 Else
 {
-    ;Hotkey, LButton, On
+    Hotkey(LButton, On)
     activeCC := "true"
 }
 Return
-*/
+
 ; Autoclicker code start
 
 AutoclickerGui := Gui(, "Autoclicker")
@@ -139,7 +144,7 @@ ButtonOpenAutoclicker:
 previousHotkeyCC := ""
 hotKeyCC := ""
 CheatClickerGui.Destroy()
-;MsgBox, 64, Important, If you want to click forever press 0 in Click Amount
+MsgBox("Important", "If you want to click forever press 0 in Click Amount", 64) ; TODO Find better way
 AutoclickerGui.Show()
 Return
 
@@ -155,22 +160,17 @@ activeAC := "true"
 Return
 
 stopKeyAC:
-if previousHotkeyAC
-{
-    ;Hotkey, %previousHotkeyAC%, Off
+if previousHotkeyAC {
+    Hotkey(%previousHotkeyAC%,, Off)
 }
-if !stopKeyAC
-{
+if !stopKeyAC {
     Return
 }
-if (activeAC = "true")
-{
+if (activeAC = "true") {
     activeAC := "false"
-}
-Else
-{
+} Else {
     activeAC := "true"
-    autoClickerStart(Amount, clickType, delay, activeAC)
+    ;autoClickerStart(Amount, clickType, delay, activeAC)
 }
 previousHotkeyAC := stopKeyAC
 Return
@@ -184,18 +184,18 @@ AutoclickerGui.Destroy()
 CheatClickerGui.Show()
 Return
 
-GuiClose:
-if (activeCC = "true")
-{
-    ;Hotkey, LButton, Off
-    activeCC := "false"
-}
+;CheatClickerGui.GuiClose
+; if (activeCC = "true")
+; {
+;     Hotkey, LButton, Off
+;     activeCC := "false"
+; }
+;MsgBox, 36, Exit App?, Do you want to close Cheat Clicker?
 /*
-MsgBox, 36, Exit App?, Do you want to close Cheat Clicker?
 ifMsgBox, Yes
 {
     ExitApp
 }
 */
-ExitApp ; Temp
-Return
+;ExitApp ; Temp
+;Return
