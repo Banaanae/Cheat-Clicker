@@ -25,4 +25,4 @@ If applicable, add a short video to help explain your problem.
 
 **Additional context**
 - Add any other context about the problem here.
-- Make sure you are running (the latest version)[https://github.com/Banaanae/Cheat-Clicker/releases/latest].
+- Make sure you are running [the latest version](https://github.com/Banaanae/Cheat-Clicker/releases/latest).
