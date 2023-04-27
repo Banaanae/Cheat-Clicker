@@ -1,12 +1,10 @@
 ; Doesn't work
 /*
 TODO
-Fix GuiControlGet - No
-Fix Buttons - WIP
-Fix Order (functions > gui) - Np
-Make it actually work -.- - Cheat clicker 90% done
+Fix Buttons - Everything but ac stop done
+Fix Order (Setup > Gui > Func > Close) - No
+Fix HotKeys
 Consistant naming - WIP
-Fix hotkeys
 */
 
 /*
@@ -14,202 +12,172 @@ Cheat Clicker
 
 Naming stuff:
 AC = AutoClicker CC = Cheat Clicker G = Global
-AC/CC/G_(name) = Func (and labels if I add any)
+AC/CC/G_(name) = Func Gui (and labels if I add any)
 (name)_AC/CC/G = Vars (no global vars atm)
 */
+
 #SingleInstance Force
 
 
 Clicks_CC := 1
-hotKeyCC := ""
-previousHotkeyCC := ""
-Active_CC := "false"
+Hotkey_CC := ""
+previousHotkeyCC := "" ; Prob won't need, same with ac
+Active_CC := "False"
 
-stopKeyAC := ""
+HotKey_AC := ""
 previousHotkeyAC := ""
-activeAC := "false"
+Active_AC := "False"
 
 LButton::
 {
     Loop Clicks_CC
     {
         Click
-    }
+    } Until (Active_CC = "False")
 }
 ;Hotkey("LButton", "On")
 Hotkey("LButton", "Off")
 
 CC_OpenAutoClicker(*) {
     previousHotkeyCC := ""
-    hotKeyCC := ""
-    CheatClickerGui.Destroy()
+    Hotkey_CC := ""
+    CC_Gui.Hide()
     ;MsgBox("If you want to click forever press 0 in Click Amount", "Important", 64) ; TODO Find better way
-    AutoClickerGui.Show()
+    AC_Gui.Show()
 }
 
-CheatClickerGui := Gui(, "Cheat Clicker")
-CheatClickerGui.AddText("x10 y10 w90 h20", "Clicks per click")
-CheatClickerGui.AddText("x110 y10 w90 h20", "Stop Hotkey")
-CheatClickerGui.AddEdit("x10 y40 w90 h20 number vClicksCtrl", "2")
-CheatClickerGui.AddHotkey("x110 y40 w90 h20 vhotKeyCC") ; ghotKeyCC
-CheatClickerGui.AddButton("x10 y70 w190 h20", "Start Cheat Clicking").OnEvent("Click", CC_StartCheatClicking)
-CheatClickerGui.AddButton("x10 y100 w190 h20", "Open AutoClicker").OnEvent("Click", CC_OpenAutoClicker)
-CheatClickerGui.AddText("x58 y130", "Made by Banaanae")
-CheatClickerGui.Show()
+CC_Gui := Gui(, "Cheat Clicker")
+CC_Gui.AddText("x10 y10 w90 h20", "Clicks per click")
+CC_Gui.AddText("x110 y10 w90 h20", "Stop Hotkey")
+ClicksCtrl_CC := CC_Gui.AddEdit("x10 y40 w90 h20 number", "2")
+HotkeyCtrl_CC := CC_Gui.AddHotkey("x110 y40 w90 h20 vHotkey_CC Disabled") ; TODO Fix hotkey
+CC_Gui.AddButton("x10 y70 w190 h20", "Start Cheat Clicking").OnEvent("Click", CC_StartCheatClicking)
+CC_Gui.AddButton("x10 y100 w190 h20", "Open AutoClicker").OnEvent("Click", CC_OpenAutoClicker)
+CC_Gui.AddText("x58 y130", "Made by Banaanae")
+CC_Gui.Show()
 
 
 
 CC_StartCheatClicking(*) {
 global
-if (hotKeyCC = "") {
+Hotkey_CC := HotkeyCtrl_CC.value
+if (Hotkey_CC = "") {
     noHotkey := MsgBox("You have not set a stop hotkey!`nWithout a stop hotkey it may be hard to stop cheat clicking`nSet one now?", "Alert", 52)
     if (noHotkey = "Yes") {
         Return
     }
 }
 Hotkey("LButton", "On")
-Clicks_CC := ClicksCtrl.Text
+Clicks_CC := ClicksCtrl_CC.Text ; .Text and .Value achieve same result .Text is better avoids `n if somehow added
 if (Clicks_CC = 1)
 {
     Hotkey("LButton", "Off")
 }
-Active_CC := "true"
+;Hotkey(Hotkey_CC, CC_Toggle(), "On")
+Active_CC := "True"
 }
 
 
-/*
-hotKeyCC() {
-if previousHotkeyCC {
-    Hotkey(%previousHotkeyCC%,, Off)
-}
-if !hotKeyCC {
-    Return
-}
-Hotkey(%hotKeyCC%, ResetCheatClicker, On)
-previousHotkeyCC := hotKeyCC
-}
-*/
-
-ResetCheatClicker() {
-if (Active_CC = "true")
+CC_Toggle() {
+global
+if (Active_CC = "True")
 {
     Hotkey("LButton", "Off")
-    Active_CC := "false"
+    Active_CC := "False"
 }
 Else
 {
     Hotkey("LButton", "On")
-    Active_CC := "true"
+    Active_CC := "True"
 }
 }
 
 ; AutoClicker code start
 
-AutoClickerGui := Gui(, "AutoClicker")
-AutoClickerGui.AddText("x10 y10 w70 h20", "Delay (ms)")
-AutoClickerGui.AddText("x90 y10 w70 h20", "Click Amount")
-AutoClickerGui.AddText("x170 y10 w70 h20 Disabled", "Hotkey")
-AutoClickerGui.AddText("x250 y10 w70 h20", "Click Type")
-AutoClickerGui.AddEdit("x10 y30 w70 h20 number vDelay", "1")
-AutoClickerGui.AddEdit("x90 y30 w70 h20 number vAmount", "0")
-AutoClickerGui.AddHotkey("x170 y30 w70 h20 vstopKeyAC Disabled") ; gstopKeyAC
-AutoClickerGui.AddDDL("x250 y30 w70 h20 vclickType R3 Choose1", ["Left","Middle","Right"])
-AutoClickerGui.AddButton("x10 y60 w150 h20", "Start").OnEvent("Click", AC_Start)
-AutoClickerGui.AddButton("x170 y60 w150 h20", "Stop").OnEvent("Click", AC_Stop)
-AutoClickerGui.AddButton("x10 y90 w310 h20", "Return to Cheat Clicker").OnEvent("Click", AC_ReturntoCheatClicker)
-AutoClickerGui.AddText("x120 y120", "Made by Banaanae")
+AC_Gui := Gui(, "AutoClicker")
+AC_Gui.AddText("x10 y10 w70 h20", "Delay (ms)")
+AC_Gui.AddText("x90 y10 w70 h20", "Click Amount")
+AC_Gui.AddText("x170 y10 w70 h20 Disabled", "Hotkey")
+AC_Gui.AddText("x250 y10 w70 h20", "Click Type")
+DelayCtrl_AC := AC_Gui.AddEdit("x10 y30 w70 h20 number", "1")
+AmountCtrl_AC := AC_Gui.AddEdit("x90 y30 w70 h20 number", "0")
+HotKey_AC := AC_Gui.AddHotkey("x170 y30 w70 h20 Disabled")
+ClickTypeCtrl_AC := AC_Gui.AddDDL("x250 y30 w70 h20 R3 Choose1", ["Left","Middle","Right"])
+AC_Gui.AddButton("x10 y60 w150 h20", "Start").OnEvent("Click", AC_StartBtn)
+AC_Gui.AddButton("x170 y60 w150 h20", "Stop").OnEvent("Click", AC_StopBtn)
+AC_Gui.AddButton("x10 y90 w310 h20", "Return to Cheat Clicker").OnEvent("Click", AC_ReturntoCheatClicker)
+AC_Gui.AddText("x120 y120", "Made by Banaanae")
 
-/*
-autoClickerStart(Amount, clickType, delay, activeAC)
+
+AC_Start(Delay_AC, Amount_AC, ClickType_AC, Active_AC)
 {
-    if (Amount = 0)
+    Loop Amount_AC
     {
-        Loop,
+        if (ClickType_AC = "Left")
         {
-            if (clickType = "Left")
-            {
-                Click
-            }
-            Else if (clickType = "Right")
-            {
-                Click, Right
-            }
-            Else
-            {
-                Click, Middle
-            }
-            Sleep, %delay%
-        } until activeAC = "false"
-    }
-    Else
-    {
-        Loop, %Amount%
+            Click("Left")
+        }
+        Else if (ClickType_AC = "Right")
         {
-            if (clickType = "Left")
-            {
-                Click
-            }
-            Else if (clickType = "Right")
-            {
-                Click, Right
-            }
-            Else
-            {
-                Click, Middle
-            }
-            Sleep, %delay%
-        } until activeAC = "false"
-        activeAC := "false"
-    }
+            Click("Right")
+        }
+        Else
+        {
+            Click("Middle")
+        }
+        Sleep(Delay_AC)
+    } until Active_AC = "False"
+    Active_AC := "False"
 }
-*/
 
-AC_Start(*) {
-/*
-GuiControlGet, Delay
-GuiControlGet, Amount
-GuiControlGet, stopKeyAC
-GuiControlGet, clickType
-*/
-activeAC := "true"
-;autoClickerStart(Amount, clickType, delay, activeAC)
+
+AC_StartBtn(*) {
+Delay_AC := DelayCtrl_AC.Text
+Amount_AC := AmountCtrl_AC.Text
+if (Amount_AC = 0) {
+    Amount_AC := ""
+}
+;HotKey_AC := HotKeyCtrl_AC.Text
+ClickType_AC := ClickTypeCtrl_AC.Text
+Active_AC := "True"
+AC_Start(Delay_AC, Amount_AC, ClickType_AC, Active_AC)
 }
 
 /*
-stopKeyAC() {
+HotKey_AC() {
 if previousHotkeyAC {
     Hotkey(%previousHotkeyAC%,, Off)
 }
-if !stopKeyAC {
+if !HotKey_AC {
     Return
 }
-if (activeAC = "true") {
-    activeAC := "false"
+if (Active_AC = "True") {
+    Active_AC := "False"
 } Else {
-    activeAC := "true"
-    ;autoClickerStart(Amount, clickType, delay, activeAC)
+    Active_AC := "True"
+    ;autoClickerStart(Amount, clickType, delay, Active_AC)
 }
-previousHotkeyAC := stopKeyAC
+previousHotkeyAC := HotKey_AC
 }
 */
 
-AC_Stop(*) {
-activeAC := "false"
+AC_StopBtn(*) {
+Active_AC := "False"
 }
 
 AC_ReturntoCheatClicker(*) {
-AutoClickerGui.Destroy()
-CheatClickerGui.Show()
+AC_Gui.Hide()
+CC_Gui.Show()
 }
 
 
-CheatClickerGui.OnEvent("Close", G_GuiClose)
-AutoClickerGui.OnEvent("Close", G_GuiClose)
+CC_Gui.OnEvent("Close", G_GuiClose)
+AC_Gui.OnEvent("Close", G_GuiClose)
 
 G_GuiClose(*) {
-if (Active_CC = "true") {
+if (Active_CC = "True") {
     Hotkey("LButton", "Off")
-    ;Active_CC := "false"
+    ;Active_CC := "False"
 }
 closeGui := MsgBox("Do you want to close Cheat Clicker?", "Exit App?", 36)
 
