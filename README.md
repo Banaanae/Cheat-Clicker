@@ -17,7 +17,7 @@
 - Double click the ahk script and it should run
 - (Optional) You can compile the script by right clicking it and pressing compile (Make sure it complies with the [license](https://github.com/Banaanae/Cheat-Clicker/blob/main/LICENSE) if you release it)
 
-If you need help, feel free to [add me on discord](https://discordapp.com/users/467230314268196898)!
+If you need help, feel free to [make an issue](https://github.com/Banaanae/Cheat-Clicker/issues)!
 
 ## Credits
 
