@@ -3,7 +3,7 @@
 TODO
 Fix Buttons - Everything but ac stop done
 Fix Order (Setup > Gui > Func > Close) - No
-Fix HotKeys
+Fix HotKeys - WIP (cc done)
 Consistant naming - WIP
 */
 
@@ -22,6 +22,7 @@ Gui_G := "CC"
 
 Clicks_CC := 1
 Hotkey_CC := ""
+HotkeyVar_CC := ""
 Active_CC := "False"
 
 HotKey_AC := ""
@@ -43,16 +44,14 @@ CC_OpenAutoClicker(*) {
     ;MsgBox("If you want to click forever press 0 in Click Amount", "Important", 64) ; TODO Find better way
     Gui_G := "AC"
     AC_Gui.Show()
-    HotKeyCtrl_AC.Value := Hotkey_CC
-    MsgBox("1: " HotKeyCtrl_AC.Value "2:" Hotkey_CC)
-    ;Hotkey_CC := ""
+    HotKeyCtrl_AC.Value := HotkeyVar_CC
 }
 
 CC_Gui := Gui(, "Cheat Clicker")
 CC_Gui.AddText("x10 y10 w90 h20", "Clicks per click")
 CC_Gui.AddText("x110 y10 w90 h20", "Stop Hotkey")
 ClicksCtrl_CC := CC_Gui.AddEdit("x10 y40 w90 h20 number", "2")
-CC_Gui.AddHotkey("x110 y40 w90 h20 vHotkey_CC") ; TODO Fix hotkey ; HotkeyCtrl_CC := 
+HotkeyCtrl_CC := CC_Gui.AddHotkey("x110 y40 w90 h20") ; TODO Fix hotkey ; HotkeyCtrl_CC := 
 CC_Gui.AddButton("x10 y70 w190 h20", "Start Cheat Clicking").OnEvent("Click", CC_StartCheatClicking)
 CC_Gui.AddButton("x10 y100 w190 h20", "Open AutoClicker").OnEvent("Click", CC_OpenAutoClicker)
 CC_Gui.AddText("x58 y130", "Made by Banaanae")
@@ -62,9 +61,8 @@ CC_Gui.Show()
 
 CC_StartCheatClicking(*) {
 global
-MsgBox(Hotkey_CC)
-MsgBox("1: " HotKeyCtrl_CC.Value "2:" Hotkey_CC)
-if (Hotkey_CC = "") {
+HotkeyVar_CC := HotkeyCtrl_CC.value
+if (HotkeyVar_CC = "") {
     noHotkey := MsgBox("You have not set a stop hotkey!`nWithout a stop hotkey it may be hard to stop cheat clicking`nSet one now?", "Alert", 52)
     if (noHotkey = "Yes") {
         Return
@@ -76,12 +74,12 @@ if (Clicks_CC = 1)
 {
     Hotkey("LButton", "Off")
 }
-Hotkey(Hotkey_CC, CC_Toggle())
+Hotkey(HotkeyVar_CC, CC_Toggle)
 Active_CC := "True"
 }
 
 
-CC_Toggle() {
+CC_Toggle(*) {
 global
 if (Active_CC = "True")
 {
