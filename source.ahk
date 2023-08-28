@@ -1,7 +1,7 @@
 ; Doesn't work
 /*
 TODO
-Fix Buttons - Everything but ac stop done
+Fix Buttons - Done i think
 Fix Order (Setup > Gui > Func > Close) - No
 Fix HotKeys - WIP (cc done)
 Consistant naming - WIP
@@ -17,7 +17,6 @@ AC/CC/G_(name) = Func Gui (and labels if I add any)
 */
 
 #SingleInstance Force
-
 Gui_G := "CC"
 
 Clicks_CC := 1
@@ -63,7 +62,7 @@ CC_StartCheatClicking(*) {
 global
 HotkeyVar_CC := HotkeyCtrl_CC.value
 if (HotkeyVar_CC = "") {
-    noHotkey := MsgBox("You have not set a stop hotkey!`nWithout a stop hotkey it may be hard to stop cheat clicking`nSet one now?", "Alert", 52)
+    noHotkey := MsgBox("You have not set a hotkey!`nWithout a hotkey it may be hard to stop cheat clicking`nSet one now?", "Alert", 52)
     if (noHotkey = "Yes") {
         Return
     }
@@ -164,29 +163,30 @@ Active_AC := "False"
 
 AC_ReturntoCheatClicker(*) {
 global
+Active_AC := "False"
 AC_Gui.Hide()
 Gui_G := "CC"
 CC_Gui.Show()
 }
 
-
 CC_Gui.OnEvent("Close", G_GuiClose)
 AC_Gui.OnEvent("Close", G_GuiClose)
 
 G_GuiClose(*) {
-global
-if (Active_CC = "True") {
-    Hotkey("LButton", "Off")
-    Active_CC := "False"
-}
-closeGui := MsgBox("Do you want to close Cheat Clicker?", "Exit App?", 36)
-if (closeGui = "Yes") {
-    ExitApp 
-} Else {
-    if (Gui_G = "CC") {
-        CC_Gui.Show()
-    } Else {
-        AC_Gui.Show()
-    }
-}
+; global
+; if (Active_CC = "True") {
+;     Hotkey("LButton", "Off")
+;     Active_CC := "False"
+; }
+; closeGui := MsgBox("Do you want to close Cheat Clicker?", "Exit App?", 36)
+; if (closeGui = "Yes") {
+;     ExitApp 
+; } Else {
+;     if (Gui_G = "CC") { ; Probably can be fixed with gui in function
+;         CC_Gui.Show()
+;     } Else {
+;         AC_Gui.Show()
+;     }
+; }
+ExitApp
 }
