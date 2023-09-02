@@ -15,7 +15,7 @@
 
 - Download the current version of [AutoHotKey](https://www.autohotkey.com) and wait for it to install
 - Double click the ahk script and it should run
-- (Optional) You can compile the script by right clicking it and pressing compile (Make sure it complies with the [license](https://github.com/Banaanae/Cheat-Clicker/blob/main/LICENSE) if you release it)
+- (Optional) You can compile the script by right clicking it and pressing compile
 
 If you need help, feel free to [add me on discord](https://discordapp.com/users/467230314268196898)!
 
