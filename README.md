@@ -1,4 +1,3 @@
-## I am aware of AutoHotKey 2.0 release and will be working to update the scripts
 # Cheat-Clicker
 
 - Cheat clicker is an open source cheat for clicking faster
