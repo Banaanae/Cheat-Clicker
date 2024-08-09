@@ -31,13 +31,19 @@ CC_Gui.AddText("x10 y10 w90 h20", "Clicks per click")
 CC_Gui.AddText("x110 y10 w90 h20", "Stop Hotkey")
 ClicksCtrl_CC := CC_Gui.AddEdit("x10 y40 w90 h20 number", "2")
 HotkeyCtrl_CC := CC_Gui.AddHotkey("x110 y40 w90 h20")
-CC_Gui.AddButton("x10 y70 w190 h20", "Start Cheat Clicking").OnEvent("Click", CC_StartCheatClicking)
+ToggleCCCtrl_CC := CC_Gui.AddButton("x10 y70 w190 h20", "Start Cheat Clicking")
+ToggleCCCtrl_CC.OnEvent("Click", CC_StartCheatClicking)
 CC_Gui.AddButton("x10 y100 w190 h20", "Open AutoClicker").OnEvent("Click", CC_OpenAutoClicker)
 CC_Gui.AddText("x58 y130", "Made by Banaanae")
 CC_Gui.Show()
 
 CC_StartCheatClicking(*) {
     global
+    if (Active_CC) { ; Turning off
+        CC_Toggle()
+        return
+    }
+    Active_CC := !Active_CC
     if (HotkeyCtrl_CC.Value = "") {
         noHotkey := MsgBox("You have not set a hotkey!`nWithout a hotkey it may be hard to stop cheat clicking`nSet one now?", "Alert", 52)
         if (noHotkey = "Yes") {
@@ -45,11 +51,11 @@ CC_StartCheatClicking(*) {
         }
     }
     Hotkey("LButton", "On")
-    if (ClicksCtrl_CC.Text = 1) {
+    if (ClicksCtrl_CC.Text = 1)
         Hotkey("LButton", "Off")
-    }
-    Hotkey(HotkeyCtrl_CC.Value, CC_Toggle)
-    Active_CC := true
+    if (HotkeyCtrl_CC.Value)
+        Hotkey(HotkeyCtrl_CC.Value, CC_Toggle)
+    CC_ToggleText()
 }
 
 CC_Toggle(*) {
@@ -60,6 +66,15 @@ CC_Toggle(*) {
     } Else {
         Hotkey("LButton", "Off")
     }
+    CC_ToggleText()
+}
+
+CC_ToggleText() {
+    global Active_CC
+    if Active_CC
+        ToggleCCCtrl_CC.Text := "Stop Cheat Clicking"
+    else
+        ToggleCCCtrl_CC.Text := "Start Cheat Clicking"
 }
 
 CC_OpenAutoClicker(*) {
